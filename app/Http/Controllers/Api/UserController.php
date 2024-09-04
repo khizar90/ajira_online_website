@@ -655,8 +655,10 @@ class UserController extends Controller
         foreach ($list as $item) {
             $find = TranscriptionRequest::where('transcription_id', $item->id)->where('user_id', $user->uuid)->where('status', 0)->first();
             if ($find) {
+                $item->text = $find->text;
                 $item->is_sumbited = true;
             } else {
+                $item->text = '';
                 $item->is_sumbited = false;
             }
         }
@@ -675,8 +677,10 @@ class UserController extends Controller
         foreach ($list as $item) {
             $find = TranslationRequest::where('translation_id', $item->id)->where('user_id', $user->uuid)->where('status', 0)->first();
             if ($find) {
+                $item->text = $find->text;
                 $item->is_sumbited = true;
             } else {
+                $item->text = '';
                 $item->is_sumbited = false;
             }
         }
