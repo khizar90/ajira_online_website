@@ -25,7 +25,7 @@ class AdminRequestController extends Controller
             foreach ($list as $item) {
                 $sub_categories = explode(',', $item->categories);
                 $index1 = Category::find($sub_categories[0]);
-                $main_catgroy = Category::find($index1->parent_id)->first();
+                $main_catgroy = Category::find($index1->parent_id);
                 $item->main_categories = $main_catgroy;
                 $item->sub_categories = Category::whereIn('id', $sub_categories)->get();
             }
