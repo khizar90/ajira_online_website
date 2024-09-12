@@ -46,8 +46,8 @@ class UserController extends Controller
             if ($submitted) {
                 $sub_categories = explode(',', $submitted->categories);
                 $index1 = Category::find($sub_categories[0]);
-                $main_catgroy = Category::find($index1->parent_id)->first();
-                $submitted->main_categories = $main_catgroy;
+                $main_category = Category::find($index1->parent_id);
+                $submitted->main_categories = $main_category;
                 $submitted->sub_categories = Category::whereIn('id', $sub_categories)->get();
             } else {
                 $submitted = new stdClass();
@@ -173,7 +173,7 @@ class UserController extends Controller
             foreach ($approved as $item) {
                 $sub_categories = explode(',', $item->categories);
                 $index1 = Category::find($sub_categories[0]);
-                $main_catgroy = Category::find($index1->parent_id)->first();
+                $main_catgroy = Category::find($index1->parent_id);
                 $item->main_categories = $main_catgroy;
                 $item->sub_categories = Category::whereIn('id', $sub_categories)->get();
             }
@@ -286,7 +286,7 @@ class UserController extends Controller
             foreach ($canceled as $item) {
                 $sub_categories = explode(',', $item->categories);
                 $index1 = Category::find($sub_categories[0]);
-                $main_catgroy = Category::find($index1->parent_id)->first();
+                $main_catgroy = Category::find($index1->parent_id);
                 $item->main_categories = $main_catgroy;
                 $item->sub_categories = Category::whereIn('id', $sub_categories)->get();
             }
@@ -305,7 +305,7 @@ class UserController extends Controller
             foreach ($canceled as $item) {
                 $sub_categories = explode(',', $item->categories);
                 $index1 = Category::find($sub_categories[0]);
-                $main_catgroy = Category::find($index1->parent_id)->first();
+                $main_catgroy = Category::find($index1->parent_id);
                 $item->main_categories = $main_catgroy;
                 $item->sub_categories = Category::whereIn('id', $sub_categories)->get();
             }
