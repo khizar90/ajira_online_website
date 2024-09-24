@@ -18,7 +18,7 @@ class AdminSocialContentController extends Controller
     {
         $create =  new SocialContent();
         $file = $request->file('image');
-        $path = Storage::disk('local')->put('SocialContent/image', $file);
+        $path = Storage::disk('local')->put('/', $file);
         $create->image = '/uploads/' . $path;
         $create->name = $request->name;
         $create->job_count = $request->job_count;
@@ -32,7 +32,7 @@ class AdminSocialContentController extends Controller
         $create = SocialContent::find($id);
         if ($request->has('image')) {
             $file = $request->file('image');
-            $path = Storage::disk('local')->put('SocialContent/image', $file);
+            $path = Storage::disk('local')->put('/', $file);
             $create->image = '/uploads/' . $path;
         }
 

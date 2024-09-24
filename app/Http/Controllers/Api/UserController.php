@@ -586,7 +586,7 @@ class UserController extends Controller
         $create->categories = $request->categories;
         if ($request->hasFile('media')) {
             $file = $request->file('media');
-            $path = Storage::disk('local')->put('user/' . $user->uuid . '/employment', $file);
+            $path = Storage::disk('local')->put('/', $file);
             $create->media = '/uploads/' . $path;
         }
         $create->time = time();
@@ -870,7 +870,7 @@ class UserController extends Controller
         $create =  new WritingRequest();
         $create->user_id = $user->uuid;
         $file = $request->file('media');
-        $path = Storage::disk('local')->put('Writing/file', $file);
+        $path = Storage::disk('local')->put('/', $file);
         $create->media = '/uploads/' . $path;
         $create->time = time();
         $create->save();

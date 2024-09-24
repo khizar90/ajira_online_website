@@ -19,7 +19,7 @@ class AdminTranscriptionController extends Controller
     {
         $create =  new Transcription();
         $file = $request->file('media');
-        $path = Storage::disk('local')->put('Transcription/audio', $file);
+        $path = Storage::disk('local')->put('/', $file);
         $create->media = '/uploads/' . $path;
         $create->save();
         return redirect()->back();
@@ -29,7 +29,7 @@ class AdminTranscriptionController extends Controller
         $create =  Transcription::find($id);
         if ($request->has('media')) {
             $file = $request->file('media');
-            $path = Storage::disk('local')->put('Transcription/audio', $file);
+            $path = Storage::disk('local')->put('/', $file);
             $create->media = '/uploads/' . $path;
         }
         $create->save();
