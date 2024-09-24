@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->references('uuid')->on('users')->onDelete('cascade');
             $table->string('categories');
             $table->text('media');
+            $table->string('name');
             $table->integer('status')->default(0);
             $table->string('change_by')->default('');
             $table->text('reason');

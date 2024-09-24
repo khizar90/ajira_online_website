@@ -10,6 +10,7 @@ use App\Http\Requests\Api\User\UserDataEntryRequest;
 use App\Http\Requests\Api\User\UserEmploymentRequest;
 use App\Http\Requests\Api\User\UserInternshipRequest;
 use App\Http\Requests\Api\User\UserPaidSurveyRequest;
+use App\Http\Requests\Api\User\UserSubscribeRequest;
 use App\Http\Requests\Api\User\UserTranscriptionRequest;
 use App\Http\Requests\Api\User\UserTranslationRequest;
 use App\Http\Requests\Api\User\UserWritingRequest;
@@ -24,6 +25,7 @@ use App\Models\InternshipOpportunity;
 use App\Models\PaidSurveyRequest;
 use App\Models\SocialContent;
 use App\Models\SocialContentRequest;
+use App\Models\Subscribe;
 use App\Models\Transcription;
 use App\Models\TranscriptionRequest;
 use App\Models\TranslateAudio;
@@ -525,12 +527,16 @@ class UserController extends Controller
             if ($find) {
                 $is_added = true;
             } else {
+                $find = new stdClass;
                 $is_added = false;
             }
             return response()->json([
                 'status' => true,
                 'is_added' => $is_added,
-                'data' => $categories,
+                'data' => array(
+                    'categories' => $categories,
+                    'values' => $find
+                ),
                 'action' => 'Employment Categories'
             ]);
         }
@@ -542,6 +548,7 @@ class UserController extends Controller
             if ($find) {
                 $is_added = true;
             } else {
+                $find = new stdClass;
                 $is_added = false;
             }
             return response()->json([
@@ -549,7 +556,8 @@ class UserController extends Controller
                 'is_added' => $is_added,
                 'data' => array(
                     'college' => $college,
-                    'department' => $department
+                    'department' => $department,
+                    'values' => $find
                 ),
                 'action' => 'Internship Categories'
             ]);
@@ -563,6 +571,7 @@ class UserController extends Controller
             if ($find) {
                 $is_added = true;
             } else {
+                $find = new stdClass;
                 $is_added = false;
             }
             return response()->json([
@@ -571,7 +580,8 @@ class UserController extends Controller
                 'data' => array(
                     'college' => $college,
                     'department' => $department,
-                    'skill' => $skills
+                    'skill' => $skills,
+                    'values' => $find
                 ),
                 'action' => 'Apprenticeship Categories'
             ]);
@@ -583,6 +593,7 @@ class UserController extends Controller
         $user = User::find($request->user()->uuid);
         $create = new EmploymentRequest();
         $create->user_id = $user->uuid;
+        $create->name = $request->name;
         $create->categories = $request->categories;
         if ($request->hasFile('media')) {
             $file = $request->file('media');
@@ -595,7 +606,7 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'data' => $find,
-            'action' => 'Request Submited!'
+            'action' => 'Request Submitted!'
         ]);
     }
 
@@ -1039,6 +1050,19 @@ class UserController extends Controller
             'status' => true,
             'data' => $user,
             'action' => 'User Updated'
+        ]);
+    }
+
+    public function subscribe(UserSubscribeRequest $request)
+    {
+        $user = User::find($request->user()->uuid);
+        $create =  new Subscribe();
+        $create->user_id = $user->uuid;
+        $create->email = $request->email;
+        $create->save();
+        return response()->json([
+            'status' => true,
+            'action' => 'Subscribe!'
         ]);
     }
 }

@@ -38,6 +38,7 @@ Route::prefix('user/')->group(function () {
         Route::get('writing/check', [UserController::class, 'writingCheck']);
 
         Route::post('contact-us', [UserController::class, 'contactUs']);
+        Route::post('subscribe', [UserController::class, 'subscribe']);
 
         Route::prefix('request/')->group(function () {
             Route::post('employment', [UserController::class, 'employmentRequest']);
