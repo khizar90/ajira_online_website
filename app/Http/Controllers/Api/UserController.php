@@ -1018,7 +1018,7 @@ class UserController extends Controller
             'message' => $request->message
         ];
 
-        Mail::to('khzrkhan0000@gmail.com')->send(new ContactUs($mailDetails));
+        Mail::to('zrzunair10@gmail.com')->send(new ContactUs($mailDetails));
         return response()->json([
             'status' => true,
             'action' => 'Form Submitted!'
