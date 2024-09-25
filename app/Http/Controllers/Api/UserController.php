@@ -23,6 +23,7 @@ use App\Models\DataEntryRequest;
 use App\Models\EmploymentRequest;
 use App\Models\InternshipOpportunity;
 use App\Models\PaidSurvey;
+use App\Models\PaidSurveyAnswer;
 use App\Models\PaidSurveyRequest;
 use App\Models\SocialContent;
 use App\Models\SocialContentRequest;
@@ -842,17 +843,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function paidSurveyRequest(UserPaidSurveyRequest $request)
+    public function paidSurveyRequest(Request $request)
     {
         $user = User::find($request->user()->uuid);
-        $create = new PaidSurveyRequest();
-        $create->user_id = $user->uuid;
-        $create->what_car = $request->what_car;
-        $create->where_gas_buy = $request->where_gas_buy;
-        $create->color = $request->color;
-        $create->age = $request->age;
-        $create->time = time();
-        $create->save();
+        $audio = new PaidSurveyRequest();
+        $audio->user_id = $user->uuid;
+        $audio->time = time();
+        $audio->save();
+        $questions = $request->json('questions');
+        foreach ($questions as $item) {
+            $create = new PaidSurveyAnswer();
+            $create->user_id = $user->uuid;
+            $create->request_id = $audio->id;
+            $create->question = $item['question'];
+            $create->answer = $item['answer'];
+            $create->save();
+        }
+
         return response()->json([
             'status' => true,
             'action' => 'Paid Survey Request Submitted!'

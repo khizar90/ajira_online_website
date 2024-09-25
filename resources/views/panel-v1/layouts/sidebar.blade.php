@@ -219,7 +219,7 @@
                 @endif
             </a>
         </li>
-        <li class="menu-item {{ Request::url() == route('dashboard-request-', 'paid-survey') ? 'active' : '' }} ">
+        <li class="menu-item {{ Request::url() == route('dashboard-request-', 'paid-survey') ? 'active' : '' }} ||  {{ Str::contains(Request::url(), '/dashboard/request/detail/paid-survey') ? 'active' : '' }}">
             <a href="{{ route('dashboard-request-', 'paid-survey') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-circle"></i>
                 <div data-i18n="Translation">Paid Survey Request</div>
@@ -301,7 +301,7 @@
               
             </a>
         </li>
-        <li class="menu-item {{ Request::url() == route('dashboard-request-approved-list', 'paid-survey') ? 'active' : '' }} ">
+        <li class="menu-item {{ Request::url() == route('dashboard-request-approved-list', 'paid-survey') ? 'active' : '' }} ||  {{ Str::contains(Request::url(), '/dashboard/request/approve-detail/paid-survey') ? 'active' : '' }}">
             <a href="{{ route('dashboard-request-approved-list', 'paid-survey') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-circle"></i>
                 <div data-i18n="Translation">Paid Survey Approve</div>

@@ -78,7 +78,9 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard-')->group(functi
 
     Route::prefix('request')->name('request-')->group(function () {
         Route::get('/{type}', [AdminRequestController::class, 'list']);
+        Route::get('detail/{type}/{id}', [AdminRequestController::class, 'detail'])->name('detail');
         Route::get('approve/{type}/{id}', [AdminRequestController::class, 'approve'])->name('approve');
+        Route::get('approve-detail/{type}/{id}', [AdminRequestController::class, 'detail'])->name('approve-detail');
         Route::post('cancel/', [AdminRequestController::class, 'cancel'])->name('cancel');
         Route::get('list/approved/{type}', [AdminRequestController::class, 'approveRequests'])->name('approved-list');
     });

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\DataEntryRequest;
 use App\Models\EmploymentRequest;
 use App\Models\InternshipOpportunity;
+use App\Models\PaidSurveyAnswer;
 use App\Models\PaidSurveyRequest;
 use App\Models\SocialContentRequest;
 use App\Models\TranscriptionRequest;
@@ -67,6 +68,14 @@ class AdminRequestController extends Controller
         if ($type == 'writing') {
             $list = WritingRequest::with(['user'])->where('status', 0)->latest()->paginate(50);
             return view('panel-v1.request.writing', compact('list', 'type'));
+        }
+    }
+
+    public function detail($type,$id){
+        $find = PaidSurveyRequest::with(['user'])->find($id);
+        if($find){
+            $answers = PaidSurveyAnswer::where('request_id',$find->id)->get();
+            return view('panel-v1.request.detail',compact('answers','find','type'));
         }
     }
     public function approve($type, $id)

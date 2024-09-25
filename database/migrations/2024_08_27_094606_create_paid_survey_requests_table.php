@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('paid_survey_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->references('uuid')->on('users')->onDelete('cascade');
-            $table->string('what_car');
-            $table->string('where_gas_buy');
-            $table->string('color');
-            $table->string('age');
+            $table->foreignUuid('user_id')->references('uuid')->on('users')->onDelete('cascade'); 
             $table->integer('status')->default(0);
             $table->string('change_by')->default('');
             $table->text('reason');

@@ -24,10 +24,8 @@ class UserPaidSurveyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'what_car' => 'required',
-            'where_gas_buy' => 'required',
-            'color' => 'required',
-            'age' =>'required'
+            'questions' => 'required',
+            'answer' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

@@ -36,10 +36,7 @@
                                 <tr>
                                     <td>#</td>
                                     <th>User</th>
-                                    <th>What Car</th>
-                                    <th>Where Gas Buy</th>
-                                    <th>Color</th>
-                                    <th>Age</th>
+                                    <th>detail</th>
                                     <th>Apply Time</th>
                                 </tr>
                             </thead>
@@ -77,21 +74,19 @@
                                             </div>
 
                                         </td>
+
                                         <td>
-                                            {{ $item->what_car }}
-                                        </td>
-                                        <td>
-                                            {{ $item->where_gas_buy }}
+                                            <a href="{{ route('dashboard-request-approve-detail', ['type' => 'paid-survey', 'id' => $item->id]) }}"
+                                                class="btn btn-primary">
+                                                Detail
+                                            </a>
                                         </td>
 
-
-                                        <td>{{ $item->color }}</td>
-                                        <td>{{ $item->age }}</td>
 
                                         <td>
                                             {{ \Carbon\Carbon::createFromTimestamp($item->time)->format('d, F Y h:i A') }}
                                         </td>
-                                        
+
                                     </tr>
                                 @endforeach
 
