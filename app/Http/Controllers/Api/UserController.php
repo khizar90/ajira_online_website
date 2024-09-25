@@ -22,6 +22,7 @@ use App\Models\DataEntry;
 use App\Models\DataEntryRequest;
 use App\Models\EmploymentRequest;
 use App\Models\InternshipOpportunity;
+use App\Models\PaidSurvey;
 use App\Models\PaidSurveyRequest;
 use App\Models\SocialContent;
 use App\Models\SocialContentRequest;
@@ -749,9 +750,11 @@ class UserController extends Controller
         } else {
             $is_submitted = false;
         }
+        $questions = PaidSurvey::get();
         return response()->json([
             'status' => true,
-            'is_sumbitted' => $is_submitted,
+            'is_submitted' => $is_submitted,
+            'data' => $questions,
             'action' => 'Paid Survey!'
         ]);
     }
