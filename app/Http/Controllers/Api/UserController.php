@@ -750,7 +750,7 @@ class UserController extends Controller
             $values = PaidSurveyAnswer::select('question','answer')->where('request_id',$check->id)->get();
             $is_submitted = true;
         } else {
-            $values = new stdClass();
+            $values = [];
             $is_submitted = false;
         }
         $questions = PaidSurvey::get();
