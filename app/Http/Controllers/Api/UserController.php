@@ -14,10 +14,10 @@ use App\Http\Requests\Api\User\UserSubscribeRequest;
 use App\Http\Requests\Api\User\UserTranscriptionRequest;
 use App\Http\Requests\Api\User\UserTranslationRequest;
 use App\Http\Requests\Api\User\UserWritingRequest;
+use App\Mail\ContactUs;
 use App\Models\ApprenticeshipOpportunity;
 use App\Models\AppTestRequest;
 use App\Models\Category;
-use App\Models\ContactUs;
 use App\Models\DataEntry;
 use App\Models\DataEntryRequest;
 use App\Models\EmploymentRequest;
@@ -38,6 +38,8 @@ use App\Models\Writing;
 use App\Models\WritingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+
 use stdClass;
 
 class UserController extends Controller
@@ -747,7 +749,7 @@ class UserController extends Controller
         $user = User::find($request->user()->uuid);
         $check = PaidSurveyRequest::where('user_id', $user->uuid)->where('status', 0)->latest()->first();
         if ($check) {
-            $values = PaidSurveyAnswer::select('question','answer')->where('request_id',$check->id)->get();
+            $values = PaidSurveyAnswer::select('question', 'answer')->where('request_id', $check->id)->get();
             $is_submitted = true;
         } else {
             $values = [];
@@ -1008,13 +1010,15 @@ class UserController extends Controller
     public function contactUs(UserContactUsReuqest $request)
     {
         $user = User::find($request->user()->uuid);
-        $create =  new ContactUs();
-        $create->user_id = $user->uuid;
-        $create->subject = $request->subject;
-        $create->full_name = $request->full_name;
-        $create->email = $request->email;
-        $create->message = $request->message;
-        $create->save();
+
+        $mailDetails = [
+            'name' => $request->full_name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message
+        ];
+
+        Mail::to('khzrkhan0000@gmail.com')->send(new ContactUs($mailDetails));
         return response()->json([
             'status' => true,
             'action' => 'Form Submitted!'
