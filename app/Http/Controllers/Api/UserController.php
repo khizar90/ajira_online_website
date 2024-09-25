@@ -747,8 +747,10 @@ class UserController extends Controller
         $user = User::find($request->user()->uuid);
         $check = PaidSurveyRequest::where('user_id', $user->uuid)->where('status', 0)->latest()->first();
         if ($check) {
+            $values = PaidSurveyAnswer::select('question','answer')->where('request_id',$check->id)->get();
             $is_submitted = true;
         } else {
+            $values = new stdClass();
             $is_submitted = false;
         }
         $questions = PaidSurvey::get();
@@ -756,6 +758,7 @@ class UserController extends Controller
             'status' => true,
             'is_submitted' => $is_submitted,
             'data' => $questions,
+            'values' => $values,
             'action' => 'Paid Survey!'
         ]);
     }
