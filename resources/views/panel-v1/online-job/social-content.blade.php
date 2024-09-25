@@ -35,9 +35,9 @@
                             <thead class="">
                                 <tr>
                                     <th>logo</th>
-                                    <th>Name</th>
-                                    <th>Total Job</th>
-                                    <th>Price Per Job</th>
+                                    <th>Task Name</th>
+                                    <th>No. of tasks</th>
+                                    <th>Price Per Task (tsh)</th>
                                     <th>instructions</th>
                                     <th>Action</th>
 
@@ -122,30 +122,30 @@
                                                                 <div class="row">
                                                                     <div class="col mb-2">
                                                                         <label for="nameWithTitle"
-                                                                            class="form-label">Name</label>
+                                                                            class="form-label">Task name</label>
                                                                         <input type="text" id=""
                                                                             name="name" class="form-control"
-                                                                            placeholder="Content Name"
+                                                                            placeholder="Task Name"
                                                                             value="{{ $item->name }}" required />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col mb-2">
                                                                         <label for="nameWithTitle"
-                                                                            class="form-label">Total Jobs</label>
+                                                                            class="form-label">No. of Tasks</label>
                                                                         <input type="text" id=""
                                                                             name="job_count" class="form-control"
-                                                                            placeholder="Number of jobs"
+                                                                            placeholder="No. of Tasks"
                                                                             value="{{ $item->job_count }}" required />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col mb-2">
                                                                         <label for="nameWithTitle"
-                                                                            class="form-label">Price Per Job</label>
+                                                                            class="form-label">Price Per Task(tsh)</label>
                                                                         <input type="text" id=""
                                                                             name="price_per_job" class="form-control"
-                                                                            placeholder="Price per job" required
+                                                                            placeholder="Price Per Task(tsh)" required
                                                                             value="{{ $item->price_per_job }}" />
                                                                     </div>
                                                                 </div>
@@ -200,23 +200,23 @@
                                     </div>
                                     <div class="row">
                                         <div class="col mb-2">
-                                            <label for="nameWithTitle" class="form-label">Name</label>
+                                            <label for="nameWithTitle" class="form-label">Task Name</label>
                                             <input type="text" id="" name="name" class="form-control"
-                                                placeholder="Content Name" required />
+                                                placeholder="Task Name" required />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col mb-2">
-                                            <label for="nameWithTitle" class="form-label">Total Jobs</label>
+                                            <label for="nameWithTitle" class="form-label">No. of Tasks</label>
                                             <input type="text" id="" name="job_count" class="form-control"
-                                                placeholder="Number of jobs" required />
+                                                placeholder="No. of Tasks" required />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col mb-2">
-                                            <label for="nameWithTitle" class="form-label">Price Per Job</label>
+                                            <label for="nameWithTitle" class="form-label">Price Per Task(tsh)</label>
                                             <input type="text" id="" name="price_per_job"
-                                                class="form-control" placeholder="Price per job" required />
+                                                class="form-control" placeholder="Price Per Task(tsh)" required />
                                         </div>
                                     </div>
 

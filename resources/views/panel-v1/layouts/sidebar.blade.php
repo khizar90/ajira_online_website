@@ -145,6 +145,12 @@
                 <div data-i18n="User">Writing</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::url() == route('dashboard-paid-survey-') ? 'active' : '' }} ">
+            <a href="{{ route('dashboard-paid-survey-') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-circle"></i>
+                <div data-i18n="User">Paid Survey</div>
+            </a>
+        </li>
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pending Requests</span>

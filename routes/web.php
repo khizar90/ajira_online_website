@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminContentController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminDataEntryController;
 use App\Http\Controllers\Admin\AdminEmploymentController;
+use App\Http\Controllers\Admin\AdminPaidSurveyController;
 use App\Http\Controllers\Admin\AdminRequestController;
 use App\Http\Controllers\Admin\AdminSocialContentController;
 use App\Http\Controllers\Admin\AdminTranscriptionController;
@@ -43,6 +44,12 @@ Route::prefix('dashboard')->middleware('auth')->name('dashboard-')->group(functi
         Route::post('/create', [AdminTranscriptionController::class, 'create'])->name('create');
         Route::post('/edit/{id}', [AdminTranscriptionController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [AdminTranscriptionController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('paid-survey')->name('paid-survey-')->group(function () {
+        Route::get('/', [AdminPaidSurveyController::class, 'list']);
+        Route::post('/create', [AdminPaidSurveyController::class, 'create'])->name('create');
+        Route::post('/edit/{id}', [AdminPaidSurveyController::class, 'edit'])->name('edit');
+        Route::get('/delete/{id}', [AdminPaidSurveyController::class, 'delete'])->name('delete');
     });
     Route::prefix('translation')->name('translation-')->group(function () {
         Route::get('/', [AdminTranslationController::class, 'list']);

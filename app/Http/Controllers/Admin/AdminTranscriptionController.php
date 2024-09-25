@@ -21,6 +21,7 @@ class AdminTranscriptionController extends Controller
         $file = $request->file('media');
         $path = Storage::disk('local')->put('/', $file);
         $create->media = '/uploads/' . $path;
+        $create->name = $request->name;
         $create->save();
         return redirect()->back();
     }
@@ -32,6 +33,8 @@ class AdminTranscriptionController extends Controller
             $path = Storage::disk('local')->put('/', $file);
             $create->media = '/uploads/' . $path;
         }
+        $create->name = $request->name;
+
         $create->save();
         return redirect()->back();
     }

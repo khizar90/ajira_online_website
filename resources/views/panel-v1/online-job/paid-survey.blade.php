@@ -1,6 +1,6 @@
 @extends('panel-v1.layouts.base')
-@section('title', 'Transcription')
-@section('main', 'Transcription Management')
+@section('title', 'Category')
+@section('main', 'Accounts Management')
 @section('link')
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
@@ -24,7 +24,7 @@
                             <button class="btn btn-secondary add-new btn-primary" tabindex="0"
                                 aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal"
                                 data-bs-target="#addNewBus"><span><i class="ti ti-plus me-0 me-sm-1 ti-xs"></i><span
-                                        class="d-none d-sm-inline-block">Add New Audio</span></span></button>
+                                        class="d-none d-sm-inline-block">Add New Question</span></span></button>
                         </div>
                     </div>
 
@@ -34,8 +34,8 @@
                         <table class="table border-top dataTable" id="usersTable">
                             <thead class="">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Media</th>
+                                    <th>Question</th>
+                                    <th>Is Required</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -43,11 +43,13 @@
                             <tbody id="">
                                 @foreach ($list as $item)
                                     <tr class="odd">
-                                        <td>{{ $item->name }}</td>
-                                        <td><a href="{{ $item->media }}" target="_blank">
-                                                <img src="/panel-v1/assets/img/audio.png" width="100" alt="">
-                                            </a>
+                                        <td class="">
+                                            {{ $item->question }}
                                         </td>
+                                        <td>
+                                            {{ $item->is_required == 0 ? 'Optional' : 'Required' }}
+                                        </td>
+
                                         <td class="" style="">
                                             <div class="d-flex align-items-center">
                                                 <a data-bs-toggle="modal" data-bs-target="#edit{{ $item->id }}"
@@ -67,12 +69,12 @@
                                                         <div class="modal-header">
                                                             <div class="modal-title" id="modalCenterTitle">Are you sure you
                                                                 want to delete
-                                                                this audio?
+                                                                this question?
                                                             </div>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="body">After deleting the audio you will add a
-                                                                new audio</div>
+                                                            <div class="body">After deleting the question you will add a
+                                                                new question</div>
                                                         </div>
                                                         <hr class="hr">
 
@@ -84,7 +86,7 @@
                                                                 </div>
                                                                 <div class="second">
                                                                     <a class="btn text-center"
-                                                                        href="{{ route('dashboard-transcription-delete', $item->id) }}">Delete</a>
+                                                                        href="{{ route('dashboard-paid-survey-delete', $item->id) }}">Delete</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -98,41 +100,42 @@
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalCenterTitle">Edit Audio
+                                                            <h5 class="modal-title" id="modalCenterTitle">Edit Question
                                                             </h5>
                                                         </div>
-                                                        <form
-                                                            action="{{ route('dashboard-transcription-edit', $item->id) }}"
+                                                        <form action="{{ route('dashboard-paid-survey-edit', $item->id) }}"
                                                             id="addBusForm" method="POST" enctype="multipart/form-data">
                                                             @csrf
 
                                                             <div class="modal-body">
                                                                 <div class="row">
-                                                                    <div class="col mb-3">
+                                                                    <div class="col mb-2">
                                                                         <label for="nameWithTitle"
-                                                                            class="form-label">Name</label>
+                                                                            class="form-label">Question</label>
                                                                         <input type="text" id="nameWithTitle"
-                                                                            name="name" class="form-control"
-                                                                            placeholder=" Name" required value="{{ $item->name }}" />
+                                                                            name="question" value="{{ $item->question }}"
+                                                                            class="form-control"
+                                                                            placeholder="Enter the question" required />
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="row">
                                                                     <div class="col mb-3">
                                                                         <label for="nameWithTitle"
-                                                                            class="form-label">Audio</label>
-                                                                        <input type="file" id=""
-                                                                            name="media" class="form-control"
-                                                                            accept="audio/*" />
+                                                                            class="form-label">Required</label>
+                                                                        <div class="col-sm-12">
+                                                                            <select id="defaultSelect" class="form-select"
+                                                                                name="is_required" required>
+                                                                                <option value="1"
+                                                                                    {{ $item->is_required == 1 ? 'selected' : '' }}>
+                                                                                    Required</option>
+                                                                                <option value="0"
+                                                                                    {{ $item->is_required == 0 ? 'selected' : '' }}>
+                                                                                    Not Required
+                                                                                </option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <a href="{{ $item->media }}" target="_blank">
-                                                                        <img src="/panel-v1/assets/img/audio.png"
-                                                                            width="100" alt="">
-                                                                    </a>
-                                                                </div>
-
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-label-secondary"
@@ -140,7 +143,7 @@
                                                                     Close
                                                                 </button>
                                                                 <button type="submit" class="btn btn-primary">Edit
-                                                                    Audio</button>
+                                                                    Question</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -159,38 +162,40 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">Add New Audio</h5>
+                                <h5 class="modal-title" id="modalCenterTitle">Add New Question</h5>
                             </div>
-                            <form action="{{ route('dashboard-transcription-create') }}" id="addBusForm" method="POST"
+                            <form action="{{ route('dashboard-paid-survey-create') }}" id="addBusForm" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col mb-3">
-                                            <label for="nameWithTitle" class="form-label">Name</label>
-                                            <input type="text" id="nameWithTitle" name="name" class="form-control"
-                                                placeholder=" Name" required />
+                                        <div class="col mb-2">
+                                            <label for="nameWithTitle" class="form-label">Question</label>
+                                            <input type="text" id="nameWithTitle" name="question"
+                                                class="form-control" placeholder="Enter the question" required />
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col mb-3">
-                                            <label for="nameWithTitle" class="form-label">Audio</label>
-                                            <input type="file" id="" name="media" class="form-control"
-                                                accept="audio/*" required />
+                                            <label for="nameWithTitle" class="form-label">Required</label>
+                                            <div class="col-sm-12">
+                                                <select id="defaultSelect" class="form-select" name="is_required"
+                                                    required>
+                                                    <option value="1">Required</option>
+                                                    <option value="0">Optional</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-label-secondary" id="closeButton"
                                         data-bs-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Add Audio</button>
+                                    <button type="submit" class="btn btn-primary">Add Question</button>
                                 </div>
                             </form>
                         </div>
