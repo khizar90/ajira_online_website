@@ -36,7 +36,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>User</th>
-                                    <th>Transcription ID</th>
+                                    <th>Transcription Name</th>
                                     <th>Transcription</th>
                                     <th>Text</th>
                                     <th>Apply Time</th>
@@ -76,7 +76,7 @@
                                             </div>
 
                                         </td>
-                                        <td>{{ $item->transcription->id }}</td>
+                                        <td>{{ $item->transcription->name }}</td>
 
                                         <td>
                                             <a href="{{ $item->transcription->media }}" target="_blank">
