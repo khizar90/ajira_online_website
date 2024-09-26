@@ -27,6 +27,7 @@ Route::prefix('user/auth')->group(function () {
 Route::prefix('user/')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('edit/profile', [UserController::class, 'updateUser']);
+        Route::get('get/profile', [UserController::class, 'getUser']);
         Route::get('category/{type}', [UserController::class, 'category']);
         Route::get('home/{main_type}/{sub_type}', [UserController::class, 'home']);
         Route::get('transcription/list', [UserController::class, 'transcriptionList']);

@@ -898,6 +898,7 @@ class UserController extends Controller
         $user = User::find($request->user()->uuid);
         $create =  new WritingRequest();
         $create->user_id = $user->uuid;
+        $create->name = $request->name;
         $file = $request->file('media');
         $path = Storage::disk('local')->put('/', $file);
         $create->media = '/uploads/' . $path;
@@ -1083,6 +1084,15 @@ class UserController extends Controller
         return response()->json([
             'status' => true,
             'action' => 'Subscribe!'
+        ]);
+    }
+
+    public function getUser(Request $request){
+        $user = User::find($request->user()->uuid);
+         return response()->json([
+            'status' => true,
+            'data' => $user,
+            'action' => 'User Profile!'
         ]);
     }
 }

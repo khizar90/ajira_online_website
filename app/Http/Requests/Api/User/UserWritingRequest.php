@@ -25,6 +25,7 @@ class UserWritingRequest extends FormRequest
     {
         return [
             'media' => 'required',
+            'name' => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

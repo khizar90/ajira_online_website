@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('writing_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->references('uuid')->on('users')->onDelete('cascade');
+            $table->string('name');
             $table->string('media');
             $table->integer('status')->default(0);
             $table->string('change_by')->default('');
