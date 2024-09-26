@@ -769,13 +769,16 @@ class UserController extends Controller
         $user = User::find($request->user()->uuid);
         $check = AppTestRequest::where('user_id', $user->uuid)->where('status', 0)->latest()->first();
         if ($check) {
+
             $is_submitted = true;
         } else {
+            $check = new stdClass();
             $is_submitted = false;
         }
         return response()->json([
             'status' => true,
             'is_sumbitted' => $is_submitted,
+            'values' => $check,
             'action' => 'App Test!'
         ]);
     }
