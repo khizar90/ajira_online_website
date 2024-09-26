@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+    <style>
+        .td-text {
+            max-width: 200px;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -80,20 +85,20 @@
                                         <td>{{ $item->translation->id }}</td>
 
                                         <td>
-                                           {{ $item->translation->text }}
+                                            {{ $item->translation->text }}
                                         </td>
                                         <td>
                                             {{ $item->translation->language }}
-                                         </td>
-                                        <td>
+                                        </td>
+                                        <td class="td-text">
                                             {{ $item->text }}
                                         </td>
 
-                                     
+
                                         <td>
                                             {{ \Carbon\Carbon::createFromTimestamp($item->time)->format('d, F Y h:i A') }}
                                         </td>
-                                        
+
                                     </tr>
                                 @endforeach
 

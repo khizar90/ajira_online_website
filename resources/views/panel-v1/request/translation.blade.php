@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="/panel-v1/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+    <style>
+        .td-text {
+            max-width: 200px;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -81,31 +86,34 @@
                                         <td>{{ $item->translation->id }}</td>
 
                                         <td>
-                                           {{ $item->translation->text }}
+                                            {{ $item->translation->text }}
                                         </td>
-                                        <td>
+                                        <td >
                                             {{ $item->translation->language }}
-                                         </td>
-                                        <td>
+                                        </td>
+                                        <td class="td-text">
                                             {{ $item->text }}
                                         </td>
 
-                                     
+
                                         <td>
                                             {{ \Carbon\Carbon::createFromTimestamp($item->time)->format('d, F Y h:i A') }}
                                         </td>
                                         <td>
                                             <button class="badge bg-label-secondary btn" data-bs-toggle="modal"
-                                                data-bs-target="#verifyModal{{ $item->id }}" text-capitalized="">Pending
+                                                data-bs-target="#verifyModal{{ $item->id }}"
+                                                text-capitalized="">Pending
                                             </button>
                                         </td>
 
-                                        <div class="modal fade" data-bs-backdrop='static' id="verifyModal{{ $item->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal fade" data-bs-backdrop='static'
+                                            id="verifyModal{{ $item->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                                                 <div class="modal-content verifymodal">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="modalCenterTitle">Approve Request</h5>
-                                                        <button type="button" class="btn modalRemove" data-bs-dismiss="modal" id="closeButtonadd"><i
+                                                        <button type="button" class="btn modalRemove"
+                                                            data-bs-dismiss="modal" id="closeButtonadd"><i
                                                                 class="fas fa-times"></i>
                                                         </button>
                                                     </div>
@@ -114,7 +122,7 @@
                                                         <div class="row">
                                                             <div class="first">
                                                                 <a href="#" class="btn" data-bs-toggle="modal"
-                                                                data-bs-target="#cancelRequest{{ $item->id }}" 
+                                                                    data-bs-target="#cancelRequest{{ $item->id }}"
                                                                     style="color: #a8aaae ">Cancel</a>
                                                             </div>
                                                             <div class="second">
@@ -123,25 +131,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                
-                                
-                                
+
+
+
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="modal fade" data-bs-backdrop='static' id="cancelRequest{{ $item->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal fade" data-bs-backdrop='static'
+                                            id="cancelRequest{{ $item->id }}" tabindex="-1" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="modalCenterTitle">Cancel Request</h5>
-                                                        <button type="button" class="btn modalRemove" data-bs-dismiss="modal" id="closeButtonadd"><i
+                                                        <button type="button" class="btn modalRemove"
+                                                            data-bs-dismiss="modal" id="closeButtonadd"><i
                                                                 class="fas fa-times"></i>
                                                         </button>
                                                     </div>
                                                     <hr>
-                                                    <form action="{{  url('dashboard/request/cancel') }}" id="addForm" method="Post"
-                                                        enctype="multipart/form-data">
+                                                    <form action="{{ url('dashboard/request/cancel') }}" id="addForm"
+                                                        method="Post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="modal-body pt-0">
                                                             <div class="row">
@@ -150,25 +160,27 @@
                                                                     <textarea id="" name="reason" class="form-control" rows="3"
                                                                         placeholder="Enter the Reason of cancalation" required></textarea>
                                                                 </div>
-                                
+
                                                             </div>
-                                                            <input type="hidden" name="type" value="{{ $type }}">
-                                                            <input type="hidden" name="id" value="{{ $item->id }}">
+                                                            <input type="hidden" name="type"
+                                                                value="{{ $type }}">
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $item->id }}">
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <button type="submit" value="Submit" class="btn btn-primary saveBtn"
-                                                                        id="signinButton" >
+                                                                    <button type="submit" value="Submit"
+                                                                        class="btn btn-primary saveBtn" id="signinButton">
                                                                         <span id="btntext">Cancel Request</span>
                                                                     </button>
                                                                 </div>
-                                
+
                                                             </div>
                                                         </div>
-                                
+
                                                     </form>
-                                
-                                
-                                
+
+
+
                                                 </div>
                                             </div>
                                         </div>
