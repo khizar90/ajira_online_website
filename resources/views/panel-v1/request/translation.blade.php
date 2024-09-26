@@ -41,7 +41,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>User</th>
-                                    <th>Translation ID</th>
                                     <th>Translation</th>
                                     <th>Language</th>
                                     <th>Text</th>
@@ -83,7 +82,6 @@
                                             </div>
 
                                         </td>
-                                        <td>{{ $item->translation->id }}</td>
 
                                         <td>
                                             {{ $item->translation->text }}
